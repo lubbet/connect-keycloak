@@ -284,7 +284,7 @@ Keycloak.prototype.getGrantFromCode = function(code, request, response) {
 };
 
 Keycloak.prototype.loginUrl = function(uuid, redirectUrl ) {
-  return this.config.realmUrl + '/tokens/login?client_id=' + encodeURIComponent( this.config.clientId ) +
+  return this.config.realmUrl + '/protocol/openid-connect/auth?response_type=code&client_id=' + encodeURIComponent( this.config.clientId ) +
     '&state=' + encodeURIComponent( uuid ) +
     '&redirect_uri=' + encodeURIComponent( redirectUrl );
 };
