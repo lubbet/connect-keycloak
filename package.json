@@ -20,7 +20,7 @@
     "jasmine": "^2.1.1"
   },
   "dependencies": {
-    "keycloak-auth-utils": "0.0.16",
+    "keycloak-auth-utils": "lubbet/keycloak-auth-utils",
     "q": "^1.1.2"
   },
   "repository": {
