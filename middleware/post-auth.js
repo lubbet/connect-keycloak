@@ -6,12 +6,17 @@ module.exports = function(keycloak) {
       return next();
     }
 
+    console.log("Keycloak post-auth middleware");
+
     if ( request.query.error ) {
+      console.log("KC PA Query error: " + request.query.error);
       return keycloak.accessDenied(request,response,next);
     }
 
     keycloak.getGrantFromCode( request.query.code, request, response )
       .then( function(grant) {
+        console.log("KC PA Got grant: " + JSON.stringify(grant));
+
         var urlParts = {
           pathname: request.path,
           query: request.query,
@@ -22,6 +27,7 @@ module.exports = function(keycloak) {
         delete urlParts.query.state;
 
         var cleanUrl = URL.format( urlParts );
+        console.log("cleanUrl: " + cleanUrl);
         
         request.kauth.grant = grant;
         try {

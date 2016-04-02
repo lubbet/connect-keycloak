@@ -244,10 +244,11 @@ Keycloak.prototype.getGrant = function(request, response) {
       });
   }
 
-  return Q.reject();
+  return Q.reject("No error given");
 };
 
 Keycloak.prototype.storeGrant = function(grant, request, response) {
+  console.log("Storing grant for: " + grant.id_token.sub);
   if ( this.stores.length < 2 ) {
     // cannot store, bearer-only, this is weird
     return;

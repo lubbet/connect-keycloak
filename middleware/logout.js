@@ -5,6 +5,8 @@ module.exports = function(keycloak, logoutUrl) {
       return next();
     }
 
+    console.log("Keycloak logout middleware");
+
     if ( request.kauth.grant ) {
       keycloak.deauthenticated( request );
       request.kauth.grant.unstore(request, response);

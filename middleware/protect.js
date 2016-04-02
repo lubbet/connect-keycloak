@@ -37,17 +37,23 @@ module.exports = function(keycloak, spec) {
   }
 
   return function(request, response, next) {
+    console.log("KC Protect (" + spec + "): " + request.url);
+
     if ( request.kauth && request.kauth.grant ) {
+      console.log("KCP Has grant");
       if ( ! guard || guard( request.kauth.grant.access_token, request, response ) ) {
         return next();
       }
 
+      console.log("KCP accessDenied");
       return keycloak.accessDenied(request,response,next);
     }
 
     if (keycloak.config.bearerOnly){
+      console.log("Bearer only, no access");
       return keycloak.accessDenied(request,response,next);
     }else{
+      console.log("No auth data, forcing login");
       forceLogin(keycloak, request, response);
     }
 

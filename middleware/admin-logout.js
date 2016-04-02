@@ -24,6 +24,8 @@ module.exports = function(keycloak, adminUrl) {
       return next();
     }
 
+    console.log("Admin-logout");
+
     var data = '';
     var self = this;
 
